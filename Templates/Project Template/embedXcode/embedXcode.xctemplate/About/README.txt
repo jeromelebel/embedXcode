@@ -1,0 +1,65 @@
+
+    embedXcode
+    ----------------------------------
+    Embedded Computing Template on Xcode 4.2
+
+
+    © Rei VILO, 2010-2012
+    CC = BY NC SA
+
+    http://sites.google.com/site/vilorei/
+    http://sites.google.com/site/vilorei/arduino/20--arduino-makefile-for-xcode
+    
+    • GitHub repository
+    https://github.com/rei-vilo/embedXcode
+
+
+Feb 14, 2012 release 1 - initial release
+
+
+mpideXcode = Xcode project
+embedXcode = Xcode template
+
+
+Contributions
+----------------------------------
+See attached documents for detailed references
+
+
+Installation
+----------------------------------
+Check and create ~/Library/Developer/Xcode
+Copy the folder Templates into ~/Library/Developer/Xcode
+
+
+Bugs and To Do
+----------------------------------
+• Set configuration in template
+• Declare PDE File as C++ Source in template
+• Include sources List for code-sense in template
+• Set board in template
+• Integrate serial console in Xcode debugging window
+• Integrate help from Arduino .html files 
+• Some debugging?
+
+
+Revision history
+----------------------------------
+Feb 14, 2012 release 1 - initial release
+
+
+Environment
+----------------------------------
+• Software
+    Mac OS X 10.7.3 Lion
+    Xcode 4.2.1 (4D502)
+    Arduino 0023
+    MPIDE 0023 mpide-0023-macosx-20111221 (optional)
+
+• Hardware
+    Arduino UNO
+	Arduino mini pro 5 V 16 MHz
+    Diligent chipKIT UNO32
+
+----------------------------------
+End of file

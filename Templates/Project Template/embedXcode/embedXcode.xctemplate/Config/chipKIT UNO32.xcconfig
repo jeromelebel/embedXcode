@@ -1,0 +1,8 @@
+//
+//  embedXcode
+//
+//  Board specifics defined in .xconfig file
+//
+
+BOARD_TAG  = uno_pic32
+BOARD_PORT = /dev/tty.usbserial*

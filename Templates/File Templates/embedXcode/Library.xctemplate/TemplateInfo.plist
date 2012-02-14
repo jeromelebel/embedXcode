@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DefaultCompletionName</key>
+	<string>Library</string>
+	<key>Description</key>
+	<string>A library for embedXcode project, including a header file and a C++ file.</string>
+	<key>CFBundleIdentifier</key>
+	<string></string>
+	<key>Kind</key>
+	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+	<key>MainTemplateFile</key>
+	<string>___FILEBASENAME___.h
+</string>
+	<key>SortOrder</key>
+	<string>1</string>
+	<key>CounterpartTemplateFile</key>
+	<string>___FILEBASENAME___.cpp</string>
+	<key>Summary</key>
+	<string>A library for embedXcode project.</string>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.macosx</string>
+	</array>
+</dict>
+</plist>

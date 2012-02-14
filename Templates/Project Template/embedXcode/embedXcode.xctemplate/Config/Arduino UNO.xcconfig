@@ -1,0 +1,8 @@
+//
+//  embedXcode
+//
+//  Board specifics defined in .xconfig file
+//
+
+BOARD_TAG  = uno
+BOARD_PORT = /dev/tty.usbmodem*

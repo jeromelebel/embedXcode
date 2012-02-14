@@ -1,0 +1,8 @@
+//
+//  embedXcode
+//
+//  Board specifics defined in .xconfig file
+//
+
+BOARD_TAG  = pro5v328
+BOARD_PORT = /dev/tty.usbmodem*

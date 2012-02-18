@@ -1,7 +1,8 @@
 //
-//  embedXcode 
+//  ___FILEBASENAME___ 
+//  Library C++ code
 //  ----------------------------------
-//  Library C++ coder
+//  Developed with embedXcode
 //
 //  ___PACKAGENAME___
 //  Created by ___USERNAME___ on ___DATE___

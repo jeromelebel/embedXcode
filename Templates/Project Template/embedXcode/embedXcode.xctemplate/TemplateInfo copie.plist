@@ -2049,10 +2049,10 @@
 		</dict>
 		<key>___PACKAGENAME___.pde</key>
 		<dict>
-			<key>FileType</key>
-			<string>public.c-plus-plus-source</string>
 			<key>Path</key>
 			<string>___PACKAGENAME___.pde</string>
+			<key>FileType</key>
+			<string>public.c-plus-plus.source</string>
 		</dict>
 		<key>LocalLibrary.cpp</key>
 		<dict>
@@ -2252,23 +2252,6 @@
 	</array>
 	<key>Project</key>
 	<dict>
-		<key>Configurations</key>
-		<dict>
-			<key>Debug</key>
-			<dict>
-				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
-				<string>__AVR_ATmega328P__</string>
-			</dict>
-			<key>Release</key>
-			<dict/>
-		</dict>
-		<key>BasedOn</key>
-		<dict>
-			<key>Debug</key>
-			<string>Config/Arduino UNO.xcconfig</string>
-			<key>Release</key>
-			<string></string>
-		</dict>
 		<key>SharedSettings</key>
 		<dict>
 			<key>PATH</key>
@@ -2293,9 +2276,19 @@
 			<key>Configurations</key>
 			<dict>
 				<key>Debug</key>
-				<dict/>
+				<dict>
+					<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+					<string>__AVR_ATmega328P__</string>
+					<key>Configuration Reference</key>
+					<string>Arduino UNO.xcconfig</string>
+				</dict>
 				<key>Release</key>
-				<dict/>
+				<dict>
+					<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+					<string>__AVR_ATmega328P__</string>
+					<key>BaseConfigurationReference</key>
+					<string>Config/Arduino UNO.xcconfig</string>
+				</dict>
 			</dict>
 			<key>BuildPhases</key>
 			<array>
@@ -2417,65 +2410,6 @@
 			<string>make</string>
 			<key>BuildToolArgsString</key>
 			<string>build -C $(PROJECT)</string>
-		</dict>
-	</array>
-	<key>Options</key>
-	<array>
-		<dict>
-			<key>Default</key>
-			<string>chipKIT UNO32</string>
-			<key>Description</key>
-			<string>Which board to compile for and upload the sketch to</string>
-			<key>Identifier</key>
-			<string>targetBoardConfigName</string>
-			<key>Name</key>
-			<string>Board</string>
-			<key>SortOrder</key>
-			<integer>1</integer>
-			<key>Type</key>
-			<string>popup</string>
-			<key>Units</key>
-			<dict>
-				<key>Arduino UNO</key>
-				<dict>
-					<key>Project</key>
-					<dict>
-						<key>BasedOn</key>
-						<dict>
-							<key>Debug</key>
-							<string>Config/Arduino UNO.xcconfig</string>
-							<key>Release</key>
-							<string></string>
-						</dict>
-					</dict>
-				</dict>
-				<key>chipKIT UNO32</key>
-				<dict>
-					<key>Project</key>
-					<dict>
-						<key>BasedOn</key>
-						<dict>
-							<key>Debug</key>
-							<string>Config/chipKIT UNO32.xcconfig</string>
-							<key>Release</key>
-							<string></string>
-						</dict>
-					</dict>
-				</dict>
-				<key>Arduino mini pro</key>
-				<dict>
-					<key>Project</key>
-					<dict>
-						<key>BasedOn</key>
-						<dict>
-							<key>Debug</key>
-							<string>Config/Arduino mini pro.xcconfig</string>
-							<key>Release</key>
-							<string></string>
-						</dict>
-					</dict>
-				</dict>
-			</dict>
 		</dict>
 	</array>
 </dict>

@@ -1,7 +1,8 @@
 //
-//  embedXcode 
-//  ----------------------------------
+//  ___FILEBASENAME___ 
 //  Library header
+//  ----------------------------------
+//  Developed with embedXcode
 //
 //  ___PACKAGENAME___
 //  Created by ___USERNAME___ on ___DATE___

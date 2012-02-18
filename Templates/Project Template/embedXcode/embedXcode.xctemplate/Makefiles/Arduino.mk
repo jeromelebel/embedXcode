@@ -1,7 +1,7 @@
 #
 # embedXcode
 # ----------------------------------
-# Embedded Computing on Xcode 4.2
+# Embedded Computing on Xcode 4.3
 #
 # © Rei VILO, 2010-2012
 # CC = BY NC SA
@@ -24,6 +24,22 @@ APP_LIB_PATH     := $(APPLICATION_PATH)/libraries
 BOARDS_TXT       := $(APPLICATION_PATH)/hardware/arduino/boards.txt
 
 
+# Sketchbook/Libraries path
+# wildcard required for ~ management
+#
+ifeq ($(wildcard ~/Library/Arduino/preferences.txt),)
+    $(error Error: run Arduino once and define sketchbook path)
+endif
+
+SKETCHBOOK_DIR = $(shell grep sketchbook.path $(wildcard ~/Library/Arduino/preferences.txt) | cut -d = -f 2)
+ifeq ($(wildcard $(SKETCHBOOK_DIR)),)
+   $(error Error: sketchbook path not found)
+endif
+USER_LIB_PATH  = $(wildcard $(SKETCHBOOK_DIR)/Libraries)
+
+
+# Tool-chain names
+#
 CC      = $(APP_TOOLS_PATH)/avr-gcc
 CXX     = $(APP_TOOLS_PATH)/avr-g++
 AR      = $(APP_TOOLS_PATH)/avr-ar

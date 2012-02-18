@@ -1,7 +1,7 @@
 #
 # embedXcode
 # ----------------------------------
-# Embedded Computing on Xcode 4.2
+# Embedded Computing on Xcode 4.3
 #
 # © Rei VILO, 2010-2012
 # CC = BY NC SA
@@ -32,6 +32,7 @@ endif
 AVRDUDE_ISP_OPTS  = -P $(ISP_PORT) $(ISP_PROG)
 
 # processor stuff
+#
 ifndef MCU
 MCU   = $(call PARSE_BOARD,$(BOARD_TAG),build.mcu)
 endif
@@ -41,6 +42,7 @@ F_CPU = $(call PARSE_BOARD,$(BOARD_TAG),build.f_cpu)
 endif
 
 # normal programming info
+#
 ifndef AVRDUDE_PROGRAMMER
 AVRDUDE_PROGRAMMER = $(call PARSE_BOARD,$(BOARD_TAG),upload.protocol)
 endif
@@ -50,6 +52,7 @@ AVRDUDE_BAUDRATE   = $(call PARSE_BOARD,$(BOARD_TAG),upload.speed)
 endif
 
 # fuses if you're using e.g. ISP
+#
 ifndef ISP_LOCK_FUSE_PRE
 ISP_LOCK_FUSE_PRE  = $(call PARSE_BOARD,$(BOARD_TAG),bootloader.unlock_bits)
 endif

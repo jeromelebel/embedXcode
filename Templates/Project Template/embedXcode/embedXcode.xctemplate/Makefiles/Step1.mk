@@ -1,7 +1,7 @@
 #
 # embedXcode
 # ----------------------------------
-# Embedded Computing on Xcode 4.2
+# Embedded Computing on Xcode 4.3
 #
 # © Rei VILO, 2010-2012
 # CC = BY NC SA
@@ -11,6 +11,37 @@
 # ----------------------------------
 # See About folder
 # 
+
+
+# Sketch unicity test and extension
+# ----------------------------------
+#
+ifeq ($(words $(wildcard *.pde) $(wildcard *.ino)), 0)
+    $(error No pde or ino sketch)
+endif
+
+ifneq ($(words $(wildcard *.pde) $(wildcard *.ino)), 1)
+    $(error More than 1 pde or ino sketch)
+endif
+
+
+ifneq ($(wildcard *.pde),)
+    SKETCH_EXTENSION := pde
+else ifneq ($(wildcard *.ino),)
+    SKETCH_EXTENSION := ino
+else 
+    $(error Extension error)
+endif
+
+
+# Early info
+#
+$(info  ---- info ----)
+$(info Project)
+$(info .    target		$(MAKECMDGOALS))
+$(info .    name		$(PROJECT_NAME))
+$(info .    tag 		$(BOARD_TAG))
+$(info .    extension	$(SKETCH_EXTENSION))
 
 
 # Board selection
@@ -31,36 +62,6 @@ ifndef BOARD_PORT
 endif
 
 NO_CORE_MAIN_FUNCTION = 1
-
-
-# Libraries
-# ----------------------------------
-# Declare application Arduino/chipKIT and users libraries used 
-# Short-listing libraries sppeds-up building
-# Otherwise, all will be considered (default)
-#
-#APP_LIBS_LIST = Wire Wire/utility EEPROM Ethernet Ethernet/utility \
-	SPI Firmata LiquidCrystal Matrix Sprite SD SD/utility Servo SoftwareSerial Stepper 
-
-APP_LIBS_LIST = Wire Wire/utility
-
-USER_LIBS_LIST = I2C_20x4 I2C_Clock I2C_Stepper \
-	I2C_Thermometer I2C_Pressure I2C_Humidity I2C_Climate \
-	I2C_Accelerometer I2C_Magnetometer I2C_Compass I2C_Gyroscope I2C_IMU \
-	I2C_Potentiometer I2C_Height_IOs \
-	I2C_RGBC_Reader I2C_RGB_LED \
-	NewSoftSerial I2C_Serial Serial_LCD \
-	MatrixMath MsTimer2 Serial_GPS pic32_RTC
-
-USER_LIBS_LIST = NewSoftSerial I2C_Serial
-
-
-# Paths
-# ----------------------------------
-# Sketchbook/Libraries path
-# wildcard required for ~ management
-#
-USER_LIB_PATH = $(wildcard $(SKETCHBOOK_DIR)/Libraries)
 
 
 # Arduino.app Mpide.app path
@@ -85,10 +86,8 @@ OBJDIR  = Builds
 # Clean if new BOARD_TAG
 # ----------------------------------
 #
-OLD_TAG := $(wildcard $(OBJDIR)/*-TAG)
-NEW_TAG := $(OBJDIR)/$(BOARD_TAG)-TAG
-
-$(info *** $(OLD_TAG))
+OLD_TAG := $(strip $(wildcard $(OBJDIR)/*-TAG))
+NEW_TAG := $(strip $(OBJDIR)/$(BOARD_TAG)-TAG)
 
 ifneq ($(OLD_TAG),$(NEW_TAG))
     CHANGE_FLAG := 1
@@ -105,10 +104,10 @@ endif
 ifneq ($(MAKECMDGOALS),boards)
 ifneq ($(MAKECMDGOALS),clean)
 ifneq ($(shell grep $(BOARD_TAG).name $(ARDUINO_PATH)/hardware/arduino/boards.txt),)
-    $(info info Arduino)
+    $(info .    platform	Arduino)
     include $(MAKEFILE_PATH)/Arduino.mk	
 else ifneq ($(shell grep $(BOARD_TAG).name $(MPIDE_PATH)/hardware/pic32/boards.txt),)
-    $(info info Mpide)     
+    $(info .    platform	Mpide)     
     include $(MAKEFILE_PATH)/Mpide.mk
 else
     $(error $(BOARD_TAG) is unknown)

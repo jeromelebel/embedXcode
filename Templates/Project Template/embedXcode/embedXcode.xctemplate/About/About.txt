@@ -15,6 +15,7 @@
 
 
 Feb 14, 2012 release 1 - initial release
+Feb 18, 2012 release 2 - improvements
 
 
 mpideXcode = Xcode project
@@ -46,6 +47,11 @@ Bugs and To Do
 Revision history
 ----------------------------------
 Feb 14, 2012 release 1 - initial release
+Feb 18, 2012 release 2 - improvements
+• sketchbook taken from Arduino or Mpide configuration
+• board selection during new project creation
+• pde ino sketch unicity test
+• updated Installation Guide
 
 
 Environment

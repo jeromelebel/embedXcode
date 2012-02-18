@@ -1,7 +1,7 @@
 #
 # embedXcode
 # ----------------------------------
-# Embedded Computing on Xcode 4.2
+# Embedded Computing on Xcode 4.3
 #
 # © Rei VILO, 2010-2012
 # CC = BY NC SA
@@ -93,10 +93,10 @@ USER_OBJS    += $(patsubst $(USER_LIB_PATH)/%.c,$(OBJDIR)/libs/%.o,$(USER_LIB_C_
 LOCAL_C_SRCS    = $(wildcard *.c)
 LOCAL_CPP_SRCS  = $(wildcard *.cpp)
 LOCAL_CC_SRCS   = $(wildcard *.cc)
-#LOCAL_PDE_SRCS  = $(wildcard *.pde)
+#LOCAL_PDE_SRCS  = $(wildcard *.$(SKETCH_EXTENSION))  
 LOCAL_AS_SRCS   = $(wildcard *.S)
 LOCAL_OBJ_FILES = $(LOCAL_C_SRCS:.c=.o) $(LOCAL_CPP_SRCS:.cpp=.o) \
-					$(LOCAL_CC_SRCS:.cc=.o) $(LOCAL_PDE_SRCS:.pde=.o) \
+					$(LOCAL_CC_SRCS:.cc=.o) $(LOCAL_PDE_SRCS:.$(SKETCH_EXTENSION)=.o) \
 					$(LOCAL_AS_SRCS:.S=.o)
 LOCAL_OBJS      = $(patsubst %,$(OBJDIR)/%,$(LOCAL_OBJ_FILES))
 
@@ -105,8 +105,6 @@ LOCAL_OBJS      = $(patsubst %,$(OBJDIR)/%,$(LOCAL_OBJ_FILES))
 # ??? Does order matter?
 #
 OBJS    = $(CORE_OBJS) $(LIB_OBJS) $(USER_OBJS) $(LOCAL_OBJS) 
-
-#$(info OBJS $(OBJS))
 
 # Dependency files
 #
@@ -156,7 +154,7 @@ LDFLAGS       = -$(MCU_FLAG_NAME)=$(MCU) -lm -Wl,--gc-sections -Os $(EXTRA_LDFLA
 
 # Rules for making a CPP file from the main sketch (.cpe)
 #
-PDEHEADER     = \\\#include \"WProgram.h\"
+PDEHEADER     = \\\#include \"WProgram.h\"  
 
 
 # Implicit rules for building everything (needed to get everything in
@@ -238,7 +236,7 @@ $(OBJDIR)/%.d: %.s
 # !!!
 # the pde -> cpp -> o file
 #
-$(OBJDIR)/%.cpp: %.pde
+$(OBJDIR)/%.cpp: %.$(SKETCH_EXTENSION)
 	@echo "pde-" $<
 	$(ECHO) $(PDEHEADER) > $@
 	$(CAT)  $< >> $@
@@ -317,12 +315,13 @@ ifneq ($(MAKECMDGOALS),boards)
 ifneq ($(MAKECMDGOALS),clean)
 $(info  ---- info ----)
 $(info Board)
-$(info .    name        $(call PARSE_BOARD,$(BOARD_TAG),name))
-$(info .    f_cpu       $(F_CPU)) 
-$(info .    mcu         $(MCU))
+$(info .    name		$(call PARSE_BOARD,$(BOARD_TAG),name))
+$(info .    f_cpu		$(F_CPU)) 
+$(info .    mcu  		$(MCU))
 $(info Ports)
-$(info .    avrdude     $(AVRDUDE_PORT))
-$(info .    serial      $(SERIAL_PORT))
+$(info .    avrdude		$(AVRDUDE_PORT))
+$(info .    serial		$(SERIAL_PORT))
+$(info  ---- info ----)
 $(info Core libraries)
 $(info .     $(CORE_LIBS_LIST))
 $(info Application Arduino / chipKIT libraries)
@@ -359,7 +358,7 @@ $(TARGET_ELF): 	$(OBJS)
 
 $(DEP_FILE):	$(OBJDIR) $(DEPS)
 		@echo "24-" $<
-		cat $(DEPS) > $(DEP_FILE)
+		@cat $(DEPS) > $(DEP_FILE)
 
 upload:		reset raw_upload
 #upload:		reset size raw_upload
@@ -420,8 +419,9 @@ size:
 
 
 clean:
+		@echo "nil" > $(OBJDIR)/nil
 		@echo "---- clean ---- "
-		-$(REMOVE) $(OBJDIR)/*
+		-@rm -r $(OBJDIR)/*
 
 changed:
 ifeq ($(CHANGE_FLAG),1)
@@ -434,7 +434,7 @@ endif
 
 depends:	$(DEPS)
 		@echo "---- depends ---- "
-		cat $(DEPS) > $(DEP_FILE)
+		@cat $(DEPS) > $(DEP_FILE)
 
 
 boards:

@@ -1,7 +1,7 @@
 #
 # embedXcode
 # ----------------------------------
-# Embedded Computing on Xcode 4.2
+# Embedded Computing on Xcode 4.3
 #
 # © Rei VILO, 2010-2012
 # CC = BY NC SA
@@ -24,6 +24,22 @@ APP_LIB_PATH     := $(APPLICATION_PATH)/hardware/pic32/libraries
 BOARDS_TXT       := $(APPLICATION_PATH)/hardware/pic32/boards.txt
 
 
+# Sketchbook/Libraries path
+# wildcard required for ~ management
+#
+ifeq ($(wildcard ~/Library/Mpide/preferences.txt),)
+    $(error Error: run Mpide once and define sketchbook path)
+endif
+
+SKETCHBOOK_DIR = $(shell grep sketchbook.path $(wildcard ~/Library/Mpide/preferences.txt) | cut -d = -f 2)
+ifeq ($(wildcard $(SKETCHBOOK_DIR)),)
+    $(error Error: sketchbook path not found)
+endif
+USER_LIB_PATH  = $(wildcard $(SKETCHBOOK_DIR)/Libraries)
+
+
+# Tool-chain names
+#
 CC      = $(APP_TOOLS_PATH)/pic32-gcc
 CXX     = $(APP_TOOLS_PATH)/pic32-g++
 AR      = $(APP_TOOLS_PATH)/pic32-ar
